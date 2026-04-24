@@ -17,20 +17,17 @@
 
       <section id="dashboard" class="card">
         <div class="stats-grid">
-          <article>
-            <p class="stat-label">Завершено сессий</p>
-            <p id="sessionsCount" class="stat-value">0</p>
-          </article>
-          <article>
-            <p class="stat-label">Текущий стрик</p>
-            <p id="streakCount" class="stat-value">0</p>
-          </article>
-          <article>
-            <p class="stat-label">Следующая сессия</p>
-            <p id="nextDate" class="stat-value small">Сегодня</p>
-          </article>
+          <article><p class="stat-label">Сессии</p><p id="sessionsCount" class="stat-value">0</p></article>
+          <article><p class="stat-label">Стрик</p><p id="streakCount" class="stat-value">0</p></article>
+          <article><p class="stat-label">Следующая</p><p id="nextDate" class="stat-value small">Сегодня</p></article>
+          <article><p class="stat-label">XP</p><p id="xpCount" class="stat-value">0</p></article>
+          <article><p class="stat-label">Уровень</p><p id="levelCount" class="stat-value">1</p></article>
+          <article><p class="stat-label">Бейдж</p><p id="badgeLabel" class="stat-value small">Новичок</p></article>
         </div>
-        <button id="startSessionBtn" class="btn btn-primary">Начать тренировку</button>
+        <div class="dashboard-actions">
+          <button id="startSessionBtn" class="btn btn-primary">Начать тренировку</button>
+          <button id="toggleEditorBtn" class="btn">Редактировать упражнения</button>
+        </div>
       </section>
 
       <section id="player" class="card hidden">
@@ -41,14 +38,17 @@
 
         <h2 id="exerciseTitle"></h2>
         <p id="exerciseMeta" class="hint"></p>
+        <p id="exerciseInstruction" class="hint"></p>
 
-        <div class="video-wrap">
-          <iframe
-            id="exerciseVideo"
-            title="Exercise demo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+        <div id="videoWrap" class="video-wrap">
+          <iframe id="exerciseVideo" title="Exercise demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div id="animationBox" class="animation-box hidden" aria-label="generated animation">
+          <div class="stick-man">
+            <span class="head"></span><span class="body"></span><span class="arm left"></span><span class="arm right"></span><span class="leg left"></span><span class="leg right"></span>
+          </div>
+          <p>Сгенерированная анимация для упражнения без видео.</p>
         </div>
 
         <div class="timer-panel">
@@ -72,6 +72,26 @@
         </div>
       </section>
 
+      <section id="editor" class="card hidden">
+        <h3>Конструктор упражнений</h3>
+        <ul id="exerciseList" class="history-list"></ul>
+        <form id="exerciseForm" class="form-grid">
+          <input id="titleInput" placeholder="Название" required />
+          <select id="modeInput"><option value="time">time</option><option value="reps">reps</option></select>
+          <input id="setsInput" type="number" min="1" value="1" placeholder="Подходы" required />
+          <input id="secondsInput" type="number" min="5" value="45" placeholder="Секунды" />
+          <input id="repsInput" type="number" min="1" value="10" placeholder="Повторы" />
+          <input id="youtubeInput" placeholder="YouTube URL (необязательно)" />
+          <input id="instructionInput" placeholder="Описание движения" />
+          <button class="btn btn-primary" type="submit">Добавить упражнение</button>
+        </form>
+      </section>
+
+      <section id="calendar" class="card">
+        <h3>Календарь выполнения</h3>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </section>
+
       <section id="history" class="card">
         <h3>История</h3>
         <ul id="historyList" class="history-list"></ul>
@@ -79,10 +99,7 @@
 
       <section class="card disclaimer">
         <h3>Важно</h3>
-        <p>
-          Это трекер упражнений, а не медицинская диагностика. При боли, отеке,
-          блокировке колена или ухудшении состояния — остановись и обратись к врачу.
-        </p>
+        <p>Это трекер упражнений, а не медицинская диагностика. При боли, отеке, блокировке колена или ухудшении состояния — остановись и обратись к врачу.</p>
       </section>
     </main>
 
