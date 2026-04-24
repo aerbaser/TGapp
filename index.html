@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knee Rehab Flow</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <p class="eyebrow">Telegram Mini App</p>
+        <h1>Колено · Rehab Flow</h1>
+        <p id="planHint" class="hint"></p>
+      </header>
+
+      <section id="dashboard" class="card">
+        <div class="stats-grid">
+          <article><p class="stat-label">Сессии</p><p id="sessionsCount" class="stat-value">0</p></article>
+          <article><p class="stat-label">Стрик</p><p id="streakCount" class="stat-value">0</p></article>
+          <article><p class="stat-label">Следующая</p><p id="nextDate" class="stat-value small">Сегодня</p></article>
+          <article><p class="stat-label">XP</p><p id="xpCount" class="stat-value">0</p></article>
+          <article><p class="stat-label">Уровень</p><p id="levelCount" class="stat-value">1</p></article>
+          <article><p class="stat-label">Бейдж</p><p id="badgeLabel" class="stat-value small">Новичок</p></article>
+        </div>
+        <div class="dashboard-actions">
+          <button id="startSessionBtn" class="btn btn-primary">Начать тренировку</button>
+          <button id="toggleEditorBtn" class="btn">Редактировать упражнения</button>
+        </div>
+      </section>
+
+      <section id="player" class="card hidden">
+        <div class="player-top">
+          <p id="exerciseIndex" class="eyebrow"></p>
+          <div class="progress"><span id="progressFill"></span></div>
+        </div>
+
+        <h2 id="exerciseTitle"></h2>
+        <p id="exerciseMeta" class="hint"></p>
+        <p id="exerciseInstruction" class="hint"></p>
+
+        <div id="videoWrap" class="video-wrap">
+          <iframe id="exerciseVideo" title="Exercise demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div id="animationBox" class="animation-box hidden" aria-label="generated animation">
+          <div class="stick-man">
+            <span class="head"></span><span class="body"></span><span class="arm left"></span><span class="arm right"></span><span class="leg left"></span><span class="leg right"></span>
+          </div>
+          <p>Сгенерированная анимация для упражнения без видео.</p>
+        </div>
+
+        <div class="timer-panel">
+          <p id="timerValue">00:45</p>
+          <div class="timer-actions">
+            <button id="timerStartBtn" class="btn">Старт</button>
+            <button id="timerPauseBtn" class="btn">Пауза</button>
+            <button id="timerResetBtn" class="btn">Сброс</button>
+          </div>
+        </div>
+
+        <div class="reps-panel hidden" id="repsPanel">
+          <p>Повторы: <span id="repsDone">0</span> / <span id="repsTarget">0</span></p>
+          <button id="repAddBtn" class="btn btn-accent">+1 повтор</button>
+        </div>
+
+        <div class="player-actions">
+          <button id="prevBtn" class="btn">Назад</button>
+          <button id="doneBtn" class="btn btn-primary">Готово</button>
+          <button id="skipBtn" class="btn">Пропустить</button>
+        </div>
+      </section>
+
+      <section id="editor" class="card hidden">
+        <h3>Конструктор упражнений</h3>
+        <ul id="exerciseList" class="history-list"></ul>
+        <form id="exerciseForm" class="form-grid">
+          <input id="titleInput" placeholder="Название" required />
+          <select id="modeInput"><option value="time">time</option><option value="reps">reps</option></select>
+          <input id="setsInput" type="number" min="1" value="1" placeholder="Подходы" required />
+          <input id="secondsInput" type="number" min="5" value="45" placeholder="Секунды" />
+          <input id="repsInput" type="number" min="1" value="10" placeholder="Повторы" />
+          <input id="youtubeInput" placeholder="YouTube URL (необязательно)" />
+          <input id="instructionInput" placeholder="Описание движения" />
+          <button class="btn btn-primary" type="submit">Добавить упражнение</button>
+        </form>
+      </section>
+
+      <section id="calendar" class="card">
+        <h3>Календарь выполнения</h3>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </section>
+
+      <section id="history" class="card">
+        <h3>История</h3>
+        <ul id="historyList" class="history-list"></ul>
+      </section>
+
+      <section class="card disclaimer">
+        <h3>Важно</h3>
+        <p>Это трекер упражнений, а не медицинская диагностика. При боли, отеке, блокировке колена или ухудшении состояния — остановись и обратись к врачу.</p>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
